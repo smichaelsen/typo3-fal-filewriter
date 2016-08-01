@@ -1,0 +1,17 @@
+{
+    "name": "smichaelsen/fal-filewriter",
+    "license": "GPL-2.0+",
+    "autoload": {
+        "psr-4": {
+            "Smichaelsen\\FalFilewriter\\": "Classes/"
+        }
+    },
+    "require": {
+        "typo3/cms-core": "^7.6"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
