@@ -1,7 +1,7 @@
 <?php
 namespace Smichaelsen\FalFilewriter;
 
-use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 
 class FileWriterService
@@ -11,7 +11,7 @@ class FileWriterService
      * @param FileGeneratorInterface $fileGenerator
      * @param string $filename
      * @param ResourceStorage $storage
-     * @return File
+     * @return FileInterface
      */
     public function saveFile(FileGeneratorInterface $fileGenerator, $filename, ResourceStorage $storage)
     {
