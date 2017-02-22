@@ -9,17 +9,30 @@ class FileWriterService
 
     /**
      * @param FileGeneratorInterface $fileGenerator
-     * @param string $filename
+     * @param string $fileIdentifier folder path and file name (without extension!) within the storage
      * @param ResourceStorage $storage
      * @return FileInterface
      */
-    public function saveFile(FileGeneratorInterface $fileGenerator, $filename, ResourceStorage $storage)
+    public function saveFile(FileGeneratorInterface $fileGenerator, $fileIdentifier, ResourceStorage $storage)
     {
-        if (!$storage->isPublic()) {
-            $filename .= '_' . $this->generateFilenameToken();
+        $pathAndFilenameSeparator = strrpos($fileIdentifier, '/');
+        if ($pathAndFilenameSeparator === false) {
+            $fileName = $fileIdentifier;
+            $folder = $storage->getRootLevelFolder();
+        } else {
+            $fileName = substr($fileIdentifier, $pathAndFilenameSeparator + 1);
+            $folderName = substr($fileIdentifier, 0, $pathAndFilenameSeparator);
+            if ($storage->hasFolder($folderName)) {
+                $folder = $storage->getFolder($folderName);
+            } else {
+                $folder = $storage->createFolder($folderName);
+            }
         }
-        $filename .= '.' . $fileGenerator->getFileExtension();
-        $fileObject = $storage->createFile($filename, $storage->getRootLevelFolder());
+        if (!$storage->isPublic()) {
+            $fileName .= '_' . $this->generateFilenameToken();
+        }
+        $fileName .= '.' . $fileGenerator->getFileExtension();
+        $fileObject = $storage->createFile($fileName, $folder);
         $fileObject->setContents($fileGenerator->getFileContent());
         return $fileObject;
     }
