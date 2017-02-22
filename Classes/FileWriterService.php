@@ -31,7 +31,12 @@ class FileWriterService
         if (!$storage->isPublic()) {
             $fileName .= '_' . $this->generateFilenameToken();
         }
-        $fileName .= '.' . $fileGenerator->getFileExtension();
+        if (strpos('.', $fileName) === false) {
+            $fileExtension = $fileGenerator->getFileExtension();
+            if (!empty($fileExtension)) {
+                $fileName .= '.' . $fileExtension;
+            }
+        }
         $fileObject = $storage->createFile($fileName, $folder);
         $fileObject->setContents($fileGenerator->getFileContent());
         return $fileObject;
