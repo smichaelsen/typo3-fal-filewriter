@@ -2,6 +2,12 @@
 
 Little helper package for when you want to create files and save them to TYPO3's File Abstraction Layer
 
+## Installation
+
+FAL Filewriter is no TYPO3 extension and not available via TER. It can only be installed via composer:
+
+`composer require smichaelsen/fal-filewriter`
+
 ## Usage
 
 ### FileGenerator
