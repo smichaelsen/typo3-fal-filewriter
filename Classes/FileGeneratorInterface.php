@@ -21,7 +21,7 @@ interface FileGeneratorInterface
     /**
      * The file extension for when the file is saved on the disk
      *
-     * @return mixed
+     * @return string
      */
     public function getFileExtension();
 
