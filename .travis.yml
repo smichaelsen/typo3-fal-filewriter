@@ -46,3 +46,8 @@ script:
   - >
     echo;
     echo "Running base build for TYPO3 $TYPO3_VERSION";
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
